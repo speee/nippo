@@ -1,0 +1,25 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
+  pool: 5
+  database: <%= Settings.db.name %>
+  host: <%= Settings.db.host %>
+  port: <%= Settings.db.port %>
+  username: <%= Settings.db.user %>
+  password: <%= Settings.db.pass %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: <%= Settings.db.name %>_test
+
+staging:
+  <<: *default
+  database: <%= Settings.db.name %>_staging
+
+production:
+  <<: *default
