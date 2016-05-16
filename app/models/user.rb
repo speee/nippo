@@ -1,6 +1,32 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer          not null, primary key
+#  email              :string(128)      not null
+#  provider           :string(32)       not null
+#  uid                :string(32)       not null
+#  name               :string(64)       not null
+#  image              :string(128)      not null
+#  token              :string(128)      not null
+#  sign_in_count      :integer          default(0), not null
+#  current_sign_in_at :datetime
+#  last_sign_in_at    :datetime
+#  current_sign_in_ip :string(255)
+#  last_sign_in_ip    :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#
+
 class User < ApplicationRecord
   devise :trackable, :omniauthable
+
+  has_one :template
 
   class << self
     def find_for_google(auth)
