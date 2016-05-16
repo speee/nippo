@@ -21,4 +21,10 @@
 
 class Template < ApplicationRecord
   belongs_to :user
+
+  def self.create_default(user)
+    create(user:         user,
+           subject_yaml: 'hoge',
+           body:         'fuga')
+  end
 end

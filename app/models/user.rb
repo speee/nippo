@@ -25,8 +25,14 @@
 
 class User < ApplicationRecord
   devise :trackable, :omniauthable
-
   has_one :template
+  after_create :create_default_template
+
+  private
+
+  def create_default_template
+    Template.create_default(self)
+  end
 
   class << self
     def find_for_google(auth)
