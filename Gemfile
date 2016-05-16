@@ -20,6 +20,7 @@ source 'https://rubygems.org' do
   gem 'virtus'
 
   group :development do
+    gem 'annotate'
     gem 'better_errors'
     gem 'bullet', group: :test
     gem 'byebug', platform: :mri, group: :test
