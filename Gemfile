@@ -42,6 +42,7 @@ source 'https://rubygems.org' do
     gem 'json_expressions'
     gem 'launchy'
     gem 'poltergeist'
+    gem 'rails-controller-testing'
     gem 'rspec-rails'
     gem 'rspec_junit_formatter'
     gem 'simplecov', require: false

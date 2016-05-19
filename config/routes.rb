@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resource :welcome, only: %i(show)
 
+  resource :template, only: %i(show)
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
   }
