@@ -20,6 +20,7 @@ source 'https://rubygems.org' do
   gem 'virtus'
 
   group :development do
+    gem 'binding_of_caller'
     gem 'annotate'
     gem 'better_errors'
     gem 'bullet', group: :test
@@ -42,6 +43,7 @@ source 'https://rubygems.org' do
     gem 'json_expressions'
     gem 'launchy'
     gem 'poltergeist'
+    gem 'rails-controller-testing'
     gem 'rspec-rails'
     gem 'rspec_junit_formatter'
     gem 'simplecov', require: false
