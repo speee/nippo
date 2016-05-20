@@ -1,2 +1,8 @@
-p = @template.subject_yaml
-pre = @template.body
+= form_for(@template, url: template_path) do |f|
+  = f.hidden_field(:id)
+  div
+    = f.text_field(:subject_yaml, size: 100)
+  div
+    = f.text_area(:body, size: '100x40')
+  div
+    = f.submit

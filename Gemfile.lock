@@ -53,6 +53,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     bullet (5.0.0)
       activesupport (>= 3.0.0)
@@ -318,6 +320,7 @@ PLATFORMS
 DEPENDENCIES
   annotate!
   better_errors!
+  binding_of_caller!
   bullet!
   byebug!
   capybara!
