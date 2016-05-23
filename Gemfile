@@ -38,8 +38,8 @@ source 'https://rubygems.org' do
     gem 'capybara'
     gem 'capybara-screenshot'
     gem 'database_rewinder'
-    gem 'factory_girl_rails'
-    gem 'ffaker'
+    gem 'factory_girl_rails', group: :development
+    gem 'ffaker',             group: :development
     gem 'json_expressions'
     gem 'launchy'
     gem 'poltergeist'
