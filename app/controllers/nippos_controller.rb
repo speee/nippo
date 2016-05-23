@@ -7,7 +7,25 @@ class NipposController < PrivateController
     )
   end
 
+  def create
+    @nippo = Nippo.new(nippo_params)
+
+    if @nippo.save
+      # TODO
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
   private
+
+  def nippo_params
+    params.require(:nippo).permit(:body, :reported_for).merge(
+      user: current_user,
+      subject_yaml: current_user.template.subject_yaml,
+    )
+  end
 
   def current_report_date
     Time.zone.today
