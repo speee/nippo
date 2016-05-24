@@ -9,3 +9,6 @@ google:
   api_client:
     id: xxxx-xxxxxxxxxxxxxx.apps.googleusercontent.com
     secret: xxxxxxxxxxx
+
+nippo:
+  send_to: 'xxx@xxxxx.xx'

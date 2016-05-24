@@ -11,7 +11,7 @@ class NipposController < PrivateController
     @nippo = Nippo.new(nippo_params)
 
     if @nippo.save
-      # TODO
+      NippoSender.new(user: current_user, nippo: @nippo).send
       redirect_to root_path
     else
       render :new

@@ -11,7 +11,7 @@ RSpec.describe NipposController do
   end
 
   describe 'POST create' do
-    it 'creates new nippo' do
+    it 'creates new nippo', :vcr do
       expect do
         post :create, nippo: {
           reported_for: Time.zone.today,

@@ -5,6 +5,7 @@ source 'https://rubygems.org' do
   gem 'coffee-rails', '~> 4.1.0'
   gem 'config'
   gem 'devise'
+  gem 'google-api-client'
   gem 'jbuilder', '~> 2.0'
   gem 'jquery-rails'
   gem 'mysql2', '>= 0.3.18', '< 0.5'
@@ -12,6 +13,7 @@ source 'https://rubygems.org' do
   gem 'omniauth-google-oauth2'
   gem 'puma', '~> 3.0'
   gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+  gem 'rmail'
   gem 'sass-rails', '~> 5.0'
   gem 'slim-rails'
   gem 'turbolinks', '~> 5.x'
@@ -47,6 +49,8 @@ source 'https://rubygems.org' do
     gem 'rspec-rails'
     gem 'rspec_junit_formatter'
     gem 'simplecov', require: false
+    gem 'vcr'
+    gem 'webmock'
   end
 
   group :doc do
