@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :welcome, only: %i(show)
 
   resource :template, only: %i(show update)
+  resources :nippos, only: %i(new create)
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

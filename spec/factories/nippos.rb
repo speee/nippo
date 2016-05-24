@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 FactoryGirl.define do
-  factory :template do
+  factory :nippo do
     user
     subject_yaml { "【日報】<%= date %> 部署 #{FFaker::NameJA.name}" }
     body { FFaker::Lorem.paragraph }
+    sequence(:reported_for) { |n| Date.new(2016, 1, 1) + n }
   end
 end

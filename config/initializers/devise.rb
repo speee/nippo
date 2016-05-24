@@ -260,6 +260,7 @@ Devise.setup do |config|
                   scope: %w(
                     email
                     profile
+                    gmail.send
                   ).join(',')
 
   # ==> Warden configuration

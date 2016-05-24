@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516090019) do
+ActiveRecord::Schema.define(version: 20160520091725) do
+
+  create_table "nippos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "user_id",                    null: false
+    t.date     "reported_for",               null: false
+    t.text     "subject_yaml", limit: 65535
+    t.text     "body",         limit: 65535
+    t.datetime "sent_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["user_id", "reported_for"], name: "index_nippos_on_user_id_and_reported_for", unique: true, using: :btree
+    t.index ["user_id"], name: "index_nippos_on_user_id", using: :btree
+  end
 
   create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "user_id",                    null: false
@@ -39,5 +51,6 @@ ActiveRecord::Schema.define(version: 20160516090019) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "nippos", "users"
   add_foreign_key "templates", "users"
 end

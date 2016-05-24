@@ -1,0 +1,7 @@
+= form_for @nippo do |f|
+  div
+    = f.text_field(:reported_for)
+  div
+    = f.text_area(:body, size: '100x40')
+  div
+    = f.submit
