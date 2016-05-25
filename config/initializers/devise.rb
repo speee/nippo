@@ -257,6 +257,7 @@ Devise.setup do |config|
                   Settings.google&.api_client&.id,
                   Settings.google&.api_client&.secret,
                   name: :google,
+                  skip_jwt: true,
                   scope: %w(
                     email
                     profile

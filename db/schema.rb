@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520091725) do
+ActiveRecord::Schema.define(version: 20160525103521) do
 
   create_table "nippos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "user_id",                    null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160520091725) do
     t.text     "body",         limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "from_name",    limit: 64
     t.index ["user_id"], name: "index_templates_on_user_id", using: :btree
   end
 
