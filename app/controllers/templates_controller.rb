@@ -21,6 +21,7 @@ class TemplatesController < PrivateController
     params.require(:template).permit(
       :subject_yaml,
       :body,
+      :from_name,
     )
   end
 end

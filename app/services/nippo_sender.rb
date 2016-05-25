@@ -20,7 +20,7 @@ class NippoSender
 
     message = RMail::Message.new
     message.header.to              = Settings.nippo.send_to
-    message.header.from            = user.email
+    message.header.from            = from
     message.header.subject         = NKF.nkf(SUBJECT_ENCODING, subject)
     message.header['Content-Type'] = TEXT_PLANE
     message.body = nippo.body
@@ -36,5 +36,14 @@ class NippoSender
 
   def subject
     nippo.subject_yaml % nippo.reported_for.strftime('%Y/%m/%d')
+  end
+
+  def from
+    if user.template.from_name.present?
+      from_jp = "#{user.template.from_name} <#{user.email}>"
+      NKF.nkf(SUBJECT_ENCODING, from_jp)
+    else
+      user.email
+    end
   end
 end
