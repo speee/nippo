@@ -10,7 +10,7 @@ class NippoSender
 
   Gmail = Google::Apis::GmailV1
   ME = 'me'
-  SUBJECT_ENCODING = '-jWM'
+  SUBJECT_ENCODING = '-wM'
   TEXT_PLANE = 'text/plain; charset=UTF-8'
   RFC822 = 'message/rfc822'
 
