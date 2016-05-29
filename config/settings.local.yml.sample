@@ -12,3 +12,6 @@ google:
 
 nippo:
   send_to: 'xxx@xxxxx.xx'
+
+# for production
+secret_key_base: xxxxxxxxxxxxxxxxxxxxxxx
