@@ -9,15 +9,13 @@ class NippoSender
   attribute :nippo, Nippo
 
   Gmail = Google::Apis::GmailV1
+  GOOGLE_TOKEN_CREDENTIAL_URI = 'https://www.googleapis.com/oauth2/v3/token'
   ME = 'me'
   SUBJECT_ENCODING = '-wM'
   TEXT_PLANE = 'text/plain; charset=UTF-8'
   RFC822 = 'message/rfc822'
 
   def send
-    gmail = Gmail::GmailService.new
-    gmail.authorization = user.token
-
     message = RMail::Message.new
     message.header.to              = Settings.nippo.send_to
     message.header.from            = from
@@ -25,7 +23,7 @@ class NippoSender
     message.header['Content-Type'] = TEXT_PLANE
     message.body = nippo.body
 
-    gmail.send_user_message(ME,
+    gmail_service.send_user_message(ME,
       upload_source: StringIO.new(message.to_s),
       content_type: RFC822)
 
@@ -33,6 +31,18 @@ class NippoSender
   end
 
   private
+
+  def gmail_service
+    gmail = Gmail::GmailService.new
+    gmail.authorization = Signet::OAuth2::Client.new(
+      token_credential_uri: GOOGLE_TOKEN_CREDENTIAL_URI,
+      client_id: Settings.google.api_client.id,
+      client_secret: Settings.google.api_client.secret,
+      refresh_token: user.refresh_token,
+    )
+    gmail.authorization.fetch_access_token!
+    gmail
+  end
 
   def subject
     nippo.subject_yaml % nippo.reported_for.strftime('%Y/%m/%d')

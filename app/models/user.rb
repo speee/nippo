@@ -9,7 +9,7 @@
 #  uid                :string(32)       not null
 #  name               :string(64)       not null
 #  image              :string(128)      not null
-#  token              :string(128)      not null
+#  refresh_token      :string(128)      not null
 #  sign_in_count      :integer          default(0), not null
 #  current_sign_in_at :datetime
 #  last_sign_in_at    :datetime
@@ -39,12 +39,12 @@ class User < ApplicationRecord
       validate_auth!(auth)
       user = User.find_or_initialize_by(email: auth.info.email)
 
-      user.provider = auth.provider
-      user.uid      = auth.uid
-      user.name     = auth.info.name
-      user.email    = auth.info.email
-      user.image    = auth.info.image
-      user.token    = auth.credentials.token
+      user.provider         = auth.provider
+      user.uid              = auth.uid
+      user.name             = auth.info.name
+      user.email            = auth.info.email
+      user.image            = auth.info.image
+      user.refresh_token    = auth.credentials.refresh_token
       user.save!
 
       user

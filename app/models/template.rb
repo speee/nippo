@@ -26,6 +26,7 @@ class Template < ApplicationRecord
   def self.create_default(user)
     create(user:         user,
            subject_yaml: Settings.template.default.subject_yaml,
-           body:         Settings.template.default.body)
+           body:         Settings.template.default.body,
+           from_name:    user.name)
   end
 end
