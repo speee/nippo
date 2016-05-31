@@ -6,6 +6,6 @@ FactoryGirl.define do
     sequence(:uid, 1000000)
     name { FFaker::NameJA.name }
     image 'https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png'
-    token { FFaker::Internet.password }
+    refresh_token { FFaker::Internet.password }
   end
 end
