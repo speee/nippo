@@ -9,6 +9,7 @@ class TemplatesController < PrivateController
     redirect_to template_path if @template.blank? || @template.user != current_user
 
     if @template.update(template_params)
+      flash[:notice] = 'テンプレートを保存しました'
       redirect_to template_path
     else
       render :show
