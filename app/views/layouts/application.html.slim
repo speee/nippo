@@ -2,12 +2,37 @@ doctype html
 html
   head
     title
-      | Nippo
+      | 日報ツール
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all'
   body
-    p.notice = notice
-    p.alert = alert
+    .container
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to '日報ツール', root_path, class: 'navbar-brand'
+          = yield :navbar
 
-    = yield
+
+      - if notice.present?
+        .alert.alert-info.alert-dismissible role="alert"
+          button.close type="button" data-dismiss="alert" aria-label="Close"
+            span aria-hidden="true"
+              | &times;
+          = notice
+      - if alert.present?
+        .alert.alert-warning.alert-dismissible role="alert"
+          button.close type="button" data-dismiss="alert" aria-label="Close"
+            span aria-hidden="true"
+              | &times;
+          = alert
+
+      = content_for?(:content) ? yield(:content) : yield
+
+      = javascript_include_tag 'application'
