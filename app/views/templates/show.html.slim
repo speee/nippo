@@ -1,10 +1,16 @@
-= form_for(@template, url: template_path) do |f|
+= form_for @template, url: template_path, class: 'form-horizontal' do |f|
   = f.hidden_field(:id)
-  div
-    = f.text_field(:subject_yaml, size: 100)
-  div
-    = f.text_field(:from_name, size: 100)
-  div
-    = f.text_area(:body, size: '100x40')
-  div
-    = f.submit
+  fieldset
+    .form-group.label-floating
+      label.control-label for="template_subject_yaml" 件名
+      = f.text_field(:subject_yaml, class: 'form-control')
+      p.help-block 「%s」の部分に自動で日付が挿入されます
+    .form-group.label-floating
+      label.control-label for="template_from_name" 差出人名
+      = f.text_field(:from_name, class: 'form-control')
+      p.help-block FROMヘッダに差出人名として日本語で挿入されます
+    .form-group.label-floating
+      label.control-label for="template_body" 本文
+      = f.text_area(:body, rows: 30, class: 'form-control')
+    .form-group
+      = f.submit 'テンプレート保存', class: 'btn btn-raised btn-info'

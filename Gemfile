@@ -16,7 +16,6 @@ source 'https://rubygems.org' do
   gem 'rmail'
   gem 'sass-rails', '~> 5.0'
   gem 'slim-rails'
-  gem 'turbolinks', '~> 5.x'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   gem 'uglifier', '>= 1.3.0'
   gem 'virtus'
