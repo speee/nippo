@@ -14,3 +14,28 @@
       = f.text_area(:body, rows: 30, class: 'form-control')
     .form-group
       = f.submit 'テンプレート保存', class: 'btn btn-raised btn-info'
+
+- if current_user.needing_tutorial?
+  .modal#tutorial
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true" ×
+          h4.modal-title テンプレートについて
+        .modal-body
+          dl
+            dt 件名
+            dd
+              | 各部署のルールに従って、所属部署と名前を記載してください。
+              br
+              | 「%s」の部分には自動で日付が挿入されますので、変更しないでください。
+            dt 差出人名
+            dd 多くの方はそのままで結構です。必要であれば変更してください。
+            dt 本文
+            dd
+              | プロフィールや署名など、自由にテンプレートを作成してください。
+              br
+              | テンプレートの本文を編集する形で日報を作成することができます。
+
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" 閉じる
