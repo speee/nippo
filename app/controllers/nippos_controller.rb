@@ -3,7 +3,7 @@ class NipposController < PrivateController
   def new
     @nippo = Nippo.new(
       body: current_user.template.body,
-      reported_for: current_report_date,
+      reported_for: Nippo.default_report_date,
     )
   end
 

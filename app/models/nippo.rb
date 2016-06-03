@@ -24,4 +24,18 @@
 
 class Nippo < ApplicationRecord
   belongs_to :user
+
+  def self.default_report_date(now = Time.zone.now)
+    if now.saturday?
+      now.to_date - 1
+    elsif now.sunday?
+      now.to_date - 2
+    elsif now.monday? && now.hour < 10
+      now.to_date - 3
+    elsif now.hour < 10
+      now.to_date - 1
+    else
+      now.to_date
+    end
+  end
 end
