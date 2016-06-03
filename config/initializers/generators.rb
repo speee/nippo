@@ -8,7 +8,3 @@ Rails.application.config.generators do |g|
   g.view_specs = false
   g.factory_girl dir: 'spec/factories'
 end
-
-Rails.application.config.time_zone = 'Tokyo'
-Rails.application.config.active_record.default_timezone = :local
-# Rails.application.config.i18n.default_locale = :ja
