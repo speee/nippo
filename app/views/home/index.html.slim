@@ -1,1 +1,16 @@
 p この辺にホットな日報とか並べたいな
+
+- if current_user.needing_tutorial?
+  .modal#tutorial
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true" ×
+          h4.modal-title 日報ツールへようこそ
+        .modal-body
+          p まずはテンプレートを編集しましょう。
+
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" 閉じる
+          button.btn.btn-primary type="button" onclick="location.href='#{template_path}'"
+            | テンプレート編集画面へ移動

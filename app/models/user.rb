@@ -28,6 +28,10 @@ class User < ApplicationRecord
   has_one :template
   after_create :create_default_template
 
+  def needing_tutorial?
+    template.updated_at <= template.created_at
+  end
+
   private
 
   def create_default_template
