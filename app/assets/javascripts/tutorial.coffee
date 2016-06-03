@@ -1,0 +1,2 @@
+$ ->
+  $('#tutorial').modal('show')

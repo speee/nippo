@@ -29,4 +29,8 @@ class Template < ApplicationRecord
            body:         Settings.template.default.body,
            from_name:    user.name)
   end
+
+  def user_updated?
+    updated_at > created_at
+  end
 end
