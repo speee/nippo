@@ -22,6 +22,7 @@ RSpec.describe TemplatesController do
       }
 
       expect(response).to redirect_to(template_path)
+      expect(flash[:first_update]).to eq true
       current_user.template.reload
       expect(current_user.template.subject_yaml).to eq subject_yaml_after
       expect(current_user.template.body).to eq body_after

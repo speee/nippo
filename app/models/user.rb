@@ -29,7 +29,7 @@ class User < ApplicationRecord
   after_create :create_default_template
 
   def needing_tutorial?
-    template.updated_at <= template.created_at
+    !template.user_updated?
   end
 
   private

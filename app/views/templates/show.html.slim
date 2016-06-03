@@ -39,3 +39,16 @@
 
         .modal-footer
           button.btn.btn-default type="button" data-dismiss="modal" 閉じる
+
+- if flash[:first_update]
+  .modal#tutorial
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true" ×
+          h4.modal-title これで初期設定は完了です
+        .modal-body
+          p メニューから「日報作成」を選択し、日報を送信してみましょう。
+
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" 閉じる
