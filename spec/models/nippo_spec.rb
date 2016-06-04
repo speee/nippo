@@ -4,6 +4,17 @@ RSpec.describe Nippo do
 
   it { is_expected.to be_valid }
 
+  describe '#dated_subject' do
+    before do
+      subject.subject = 'pre %s post'
+      subject.reported_for = Date.parse('2016-06-04')
+    end
+
+    it 'returns subject string when date inserted' do
+      expect(subject.dated_subject).to eq 'pre 2016/06/04 post'
+    end
+  end
+
   describe '.default_report_date' do
     shared_examples '.default_report_date' do |input, output|
       let(:now) { Time.zone.parse(input) }
