@@ -19,7 +19,7 @@ class NippoSender
     message = RMail::Message.new
     message.header.to              = Settings.nippo.send_to
     message.header.from            = from
-    message.header.subject         = NKF.nkf(SUBJECT_ENCODING, subject)
+    message.header.subject         = NKF.nkf(SUBJECT_ENCODING, nippo.dated_subject)
     message.header['Content-Type'] = TEXT_PLANE
     message.body = nippo.body
 
@@ -42,10 +42,6 @@ class NippoSender
     )
     gmail.authorization.fetch_access_token!
     gmail
-  end
-
-  def subject
-    nippo.subject % nippo.reported_for.strftime('%Y/%m/%d')
   end
 
   def from

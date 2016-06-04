@@ -25,6 +25,10 @@
 class Nippo < ApplicationRecord
   belongs_to :user
 
+  def dated_subject
+    subject % reported_for.strftime('%Y/%m/%d')
+  end
+
   def self.default_report_date(now = Time.zone.now)
     if now.saturday?
       now.to_date - 1
