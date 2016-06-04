@@ -9,7 +9,7 @@ RSpec.describe Template do
     subject { user.template }
 
     it 'creates default template' do
-      expect(subject.subject_yaml).to include('【日報】')
+      expect(subject.subject).to include('【日報】')
       expect(subject.body).to include('雑感')
       expect(subject.from_name).to eq user.name
     end

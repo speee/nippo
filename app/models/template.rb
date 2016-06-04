@@ -3,13 +3,13 @@
 #
 # Table name: templates
 #
-#  id           :integer          not null, primary key
-#  user_id      :integer          not null
-#  subject_yaml :text(65535)
-#  body         :text(65535)
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  from_name    :string(64)
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  subject    :text(65535)
+#  body       :text(65535)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  from_name  :string(64)
 #
 # Indexes
 #
@@ -24,10 +24,10 @@ class Template < ApplicationRecord
   belongs_to :user
 
   def self.create_default(user)
-    create(user:         user,
-           subject_yaml: Settings.template.default.subject_yaml,
-           body:         Settings.template.default.body,
-           from_name:    user.name)
+    create(user:      user,
+           subject:   Settings.template.default.subject,
+           body:      Settings.template.default.body,
+           from_name: user.name)
   end
 
   def user_updated?

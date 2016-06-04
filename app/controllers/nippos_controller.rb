@@ -24,7 +24,7 @@ class NipposController < PrivateController
   def nippo_params
     params.require(:nippo).permit(:body, :reported_for).merge(
       user: current_user,
-      subject_yaml: current_user.template.subject_yaml,
+      subject: current_user.template.subject,
     )
   end
 
