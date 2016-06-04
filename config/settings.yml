@@ -1,6 +1,6 @@
 template:
   default:
-    subject_yaml: 【日報】%s 部署 名前
+    subject: 【日報】%s 部署 名前
     body: |
       ■雑感
 

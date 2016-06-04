@@ -23,7 +23,7 @@ class TemplatesController < PrivateController
 
   def template_params
     params.require(:template).permit(
-      :subject_yaml,
+      :subject,
       :body,
       :from_name,
     )

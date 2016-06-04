@@ -6,7 +6,7 @@
 #  id           :integer          not null, primary key
 #  user_id      :integer          not null
 #  reported_for :date             not null
-#  subject_yaml :text(65535)
+#  subject      :text(65535)
 #  body         :text(65535)
 #  sent_at      :datetime
 #  created_at   :datetime         not null

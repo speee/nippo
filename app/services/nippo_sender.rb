@@ -45,7 +45,7 @@ class NippoSender
   end
 
   def subject
-    nippo.subject_yaml % nippo.reported_for.strftime('%Y/%m/%d')
+    nippo.subject % nippo.reported_for.strftime('%Y/%m/%d')
   end
 
   def from
