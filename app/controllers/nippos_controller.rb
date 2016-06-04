@@ -21,6 +21,8 @@ class NipposController < PrivateController
 
   def show
     @nippo = Nippo.find(params[:id])
+    reaction = Reaction.find_or_create_by(user: current_user, nippo: @nippo)
+    Reaction.increment_counter(:page_view, reaction.id)
   end
 
   private

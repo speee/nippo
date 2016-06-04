@@ -20,4 +20,24 @@ RSpec.describe NipposController do
       end.to change(Nippo, :count).by(1)
     end
   end
+
+  describe 'GET show' do
+    let(:nippo) { FG.create(:nippo) }
+
+    it 'shows nippo' do
+      get :show, id: nippo.id
+      expect(assigns(:nippo)).to eq nippo
+    end
+
+    it 'creates reaction object and sets pv as 1' do
+      get :show, id: nippo.id
+      expect(Reaction.find_by(user: current_user, nippo: nippo).page_view).to eq 1
+    end
+
+    it 'increment existing reaction page view' do
+      get :show, id: nippo.id
+      expect { get :show, id: nippo.id }
+        .to change { Reaction.find_by(user: current_user, nippo: nippo).page_view }.by(1)
+    end
+  end
 end
