@@ -1,4 +1,11 @@
-p この辺にホットな日報とか並べたいな
+.btn-group-vertical.col-md-12
+  - @recent_nippos.each do |nippo|
+    = link_to nippo.dated_subject, nippo, class: 'btn btn-raised', style: 'text-align:left !important'
+
+p
+  | ※ ツールから送信された日報の最新
+  = @recent_nippos.size
+  | 件を表示しています
 
 - if current_user.needing_tutorial?
   .modal#tutorial
