@@ -14,6 +14,7 @@
 #
 # Indexes
 #
+#  index_nippos_on_sent_at                   (sent_at)
 #  index_nippos_on_user_id                   (user_id)
 #  index_nippos_on_user_id_and_reported_for  (user_id,reported_for) UNIQUE
 #
