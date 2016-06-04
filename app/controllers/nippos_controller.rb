@@ -19,6 +19,10 @@ class NipposController < PrivateController
     end
   end
 
+  def show
+    @nippo = Nippo.find(params[:id])
+  end
+
   private
 
   def nippo_params
