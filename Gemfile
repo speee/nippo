@@ -13,6 +13,7 @@ source 'https://rubygems.org' do
   gem 'omniauth-google-oauth2'
   gem 'puma', '~> 3.0'
   gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+  gem 'rinku', require: 'rails_rinku'
   gem 'rmail'
   gem 'sass-rails', '~> 5.0'
   gem 'slim-rails'
