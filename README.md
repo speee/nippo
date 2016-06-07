@@ -1,24 +1,34 @@
-# README
+# 日報ツール
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/nisshiee/nippo.svg?style=svg)](https://circleci.com/gh/nisshiee/nippo)
 
-Things you may want to cover:
+メールで送られている日報を社内SNSのようなコミュニケーションツールに昇華するためのプラットフォームです。
 
-* Ruby version
 
-* System dependencies
+## ご利用について
 
-* Configuration
+- このツールは株式会社Speeeでの運用を前提に最適化してます
+  - 他社でも利用は可能だとは思いますが、最適化は各自でお願い致します
 
-* Database creation
 
-* Database initialization
+## ご意見・ご要望
 
-* How to run the test suite
+[こちら](https://github.com/nisshiee/nippo/issues)から投稿してください。
 
-* Services (job queues, cache servers, search engines, etc.)
+※ 注意
 
-* Deployment instructions
+- 既に同じ内容のissueが上がっていないか確認してください
+- 本GithubリポジトリはPublicになっています
+  - issueの内容や添付ファイルも公開情報になりますので、社外秘情報等が含まれないようにしてください
+- 必ずしもご要望に沿えるとは限りませんので、ご了承ください
 
-* ...
+
+## 開発について
+
+PullRequest歓迎です。特に、SpeeeエンジニアからのPullRequestお待ちしております。
+
+TODO: 開発環境構築手順
+
+## License
+
+This software is released under the MIT License, see [LICENSE.txt](LICENSE.txt).

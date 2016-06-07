@@ -7,6 +7,11 @@ p
   = @recent_nippos.size
   | 件を表示しています
 
+p
+  | ご意見・ご要望は、
+  = link_to 'こちら', 'https://github.com/nisshiee/nippo/blob/master/README.md', target: '_blank'
+  | をご覧ください。
+
 - if current_user.needing_tutorial?
   .modal#tutorial
     .modal-dialog
