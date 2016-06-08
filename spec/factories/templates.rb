@@ -5,5 +5,6 @@ FactoryGirl.define do
     from_name { FFaker::NameJA.name }
     subject { "【日報】<%= date %> 部署 #{from_name}" }
     body { FFaker::Lorem.paragraph }
+    cc { FFaker::Internet.safe_email }
   end
 end

@@ -23,6 +23,8 @@ class NippoSender
     message.header['Content-Type'] = TEXT_PLANE
     message.body = nippo.body
 
+    message.header.cc = user.template.cc if user.template.cc.present?
+
     gmail_service.send_user_message(ME,
       upload_source: StringIO.new(message.to_s),
       content_type: RFC822)
