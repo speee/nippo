@@ -26,6 +26,7 @@ class TemplatesController < PrivateController
       :subject,
       :body,
       :from_name,
+      :cc,
     )
   end
 end

@@ -12,6 +12,7 @@ RSpec.describe TemplatesController do
     let(:subject_after) { FFaker::Lorem.phrase }
     let(:body_after) { FFaker::Lorem.paragraph }
     let(:from_name_after) { FFaker::NameJA.name }
+    let(:cc_after) { FFaker::Internet.safe_email }
 
     it 'updates template and redirects to :show' do
       patch :update, template: {
@@ -19,6 +20,7 @@ RSpec.describe TemplatesController do
         subject: subject_after,
         body: body_after,
         from_name: from_name_after,
+        cc: cc_after,
       }
 
       expect(response).to redirect_to(template_path)
@@ -27,6 +29,7 @@ RSpec.describe TemplatesController do
       expect(current_user.template.subject).to eq subject_after
       expect(current_user.template.body).to eq body_after
       expect(current_user.template.from_name).to eq from_name_after
+      expect(current_user.template.cc).to eq cc_after
     end
   end
 end
