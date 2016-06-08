@@ -10,6 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  from_name  :string(64)
+#  cc         :text(65535)
 #
 # Indexes
 #
@@ -22,6 +23,12 @@
 
 class Template < ApplicationRecord
   belongs_to :user
+
+  def cc=(val)
+    ary = RMail::Address.parse(val).format
+    joined = ary.empty? ? nil : ary.join(',')
+    super(joined)
+  end
 
   def self.create_default(user)
     create(user:      user,
