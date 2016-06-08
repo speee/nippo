@@ -18,11 +18,12 @@ class NippoSender
   def send
     message = RMail::Message.new
     message.header.to              = Settings.nippo.send_to
-    message.header.cc              = user.template.cc
     message.header.from            = from
     message.header.subject         = NKF.nkf(SUBJECT_ENCODING, nippo.dated_subject)
     message.header['Content-Type'] = TEXT_PLANE
     message.body = nippo.body
+
+    message.header.cc = user.template.cc if user.template.cc.present?
 
     gmail_service.send_user_message(ME,
       upload_source: StringIO.new(message.to_s),
