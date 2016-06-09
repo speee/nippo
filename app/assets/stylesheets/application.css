@@ -17,3 +17,8 @@
  *= require_self
  */
 body { padding-top: 80px; }
+
+.navbar-brand img {
+	width: 120px;
+	margin: 4px 0 0 0;
+}
