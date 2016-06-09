@@ -21,3 +21,8 @@ body { padding-top: 80px; }
 body .container .well.mod_template {
 	background: #EEEEEE;
 }
+
+.navbar-brand img {
+	width: 120px;
+	margin: 4px 0 0 0;
+}
