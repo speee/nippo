@@ -1,0 +1,5 @@
+h3 作成済み日報一覧
+
+.btn-group-vertical.col-md-12
+  - @my_nippos.each do |nippo|
+    = link_to nippo.dated_subject, nippo, class: 'btn btn-raised', style: 'text-align:left !important'
