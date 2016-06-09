@@ -11,3 +11,19 @@
       .form-group.label-floating
         label.control-label for="nippo_body" 本文
         = f.text_area(:body, rows: 40, class: 'form-control', tabindex: 1)
+
+- if current_user.needing_tutorial?
+  .modal#tutorial
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true" ×
+          h4.modal-title.text-danger
+            span.glyphicon.glyphicon-exclamation-sign aria-hidden="true"
+            | 注意！
+        .modal-body
+          | テンプレートを先に編集しないと、意図と異なる件名で送信される可能性があります
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal" 閉じる
+          button.btn.btn-primary type="button" onclick="location.href='#{template_path}'"
+            | テンプレート編集画面へ移動
