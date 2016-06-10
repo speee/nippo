@@ -19,6 +19,28 @@ RSpec.describe NipposController do
         }
       end.to change(Nippo, :count).by(1)
     end
+
+    context 'with :preview' do
+      it 'shows preview' do
+        post :create, preview: 'プレビュー', nippo: {
+          reported_for: Time.zone.today,
+          body: FFaker::Lorem.paragraph,
+        }
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:preview)
+      end
+    end
+
+    context 'with :back' do
+      it 'shows form' do
+        post :create, back: '戻る', nippo: {
+          reported_for: Time.zone.today,
+          body: FFaker::Lorem.paragraph,
+        }
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:new)
+      end
+    end
   end
 
   describe 'GET show' do
