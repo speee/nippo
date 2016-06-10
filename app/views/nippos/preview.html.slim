@@ -1,0 +1,14 @@
+p
+  span.label.label-info プレビュー
+
+.row
+  .col-sm-3.col-sm-push-9.text-right
+    = form_for @nippo do |f|
+      = f.hidden_field :reported_for
+      = f.text_area :body, class: 'hidden'
+      = f.submit '戻る', name: 'back', class: 'btn btn-raised', tabindex: 2
+      = f.submit '日報送信', class: 'btn btn-info btn-raised', tabindex: 1
+  .col-sm-9.col-sm-pull-3
+    h3 = @nippo.dated_subject
+
+.well = auto_link(@nippo.body).gsub(/(\r\n|\r|\n)/, '<br>').html_safe

@@ -10,11 +10,21 @@ class NipposController < PrivateController
   def create
     @nippo = Nippo.new(nippo_params)
 
-    if @nippo.save
+    if params[:back]
+      render :new
+    elsif params[:preview]
+      if @nippo.valid?
+        render :preview
+      else
+        flash.now[:alert] = @nippo.errors.full_messages
+        render :new
+      end
+    elsif @nippo.save
       NippoSender.new(user: current_user, nippo: @nippo).send
       flash[:notice] = '日報を送信しました'
       redirect_to root_path
     else
+      flash.now[:alert] = @nippo.errors.full_messages
       render :new
     end
   end

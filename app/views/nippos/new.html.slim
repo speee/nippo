@@ -7,7 +7,8 @@
           = f.text_field(:reported_for, class: 'form-control', tabindex: -1)
           p.help-block 指定した日付の日報として送信されます（件名にも挿入されます）
           span.input-group-btn
-            = f.submit '日報送信', class: 'btn btn-raised btn-info', tabindex: 2
+            = f.submit 'プレビュー', name: 'preview', class: 'btn btn-raised', tabindex: -1
+            = f.submit '日報送信', class: 'btn btn-info btn-raised', tabindex: 2
       .form-group.label-floating
         label.control-label for="nippo_body" 本文
         = f.text_area(:body, rows: 40, class: 'form-control', tabindex: 1)
