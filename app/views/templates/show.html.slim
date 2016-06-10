@@ -1,3 +1,16 @@
+- if current_user.needing_tutorial?
+  .alert.alert-dismissible.alert-warning
+    button.close type="button" data-dismiss="alert" ×
+    h4 注意
+    p
+      | 「件名」の
+      b 部署
+      | 、及び
+      b 名前
+      | は自動で挿入されませんので、テンプレート内で
+      b ご自身で記入
+      | してください。
+
 = form_for @template, url: template_path, class: 'form-horizontal' do |f|
   = f.hidden_field(:id)
   .well.mod_template
@@ -31,7 +44,8 @@
           dl
             dt 件名
             dd
-              | 各部署のルールに従って、所属部署と名前を記載してください。
+              | 各部署のルールに従って、
+              b.text-danger 所属部署と名前を記載してください。
               br
               | 「%s」の部分には自動で日付が挿入されますので、変更しないでください。
             dt 差出人名
