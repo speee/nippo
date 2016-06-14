@@ -16,11 +16,14 @@ source 'https://rubygems.org' do
   gem 'rinku', require: 'rails_rinku'
   gem 'rmail'
   gem 'sass-rails', '~> 5.0'
-  gem 'skylight'
   gem 'slim-rails'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   gem 'uglifier', '>= 1.3.0'
   gem 'virtus'
+
+  group :production do
+    gem 'skylight'
+  end
 
   group :development do
     gem 'binding_of_caller'
