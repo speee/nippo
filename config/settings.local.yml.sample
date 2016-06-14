@@ -15,3 +15,6 @@ nippo:
 
 # for production
 secret_key_base: xxxxxxxxxxxxxxxxxxxxxxx
+
+skylight:
+  authentication: xxxxxxxxxxxxxxxxxxxxxx
