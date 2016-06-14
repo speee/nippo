@@ -21,6 +21,10 @@ source 'https://rubygems.org' do
   gem 'uglifier', '>= 1.3.0'
   gem 'virtus'
 
+  group :production do
+    gem 'skylight'
+  end
+
   group :development do
     gem 'binding_of_caller'
     gem 'annotate'
