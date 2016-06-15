@@ -30,8 +30,10 @@
       .form-group.label-floating
         label.control-label for="template_body" 本文
         = f.text_area(:body, rows: 30, class: 'form-control')
-      .form-group
-        = f.submit 'テンプレート保存', class: 'btn btn-raised btn-info'
+      .form-group.l_send
+        .container
+          span.input-group-btn
+            = f.submit 'テンプレート保存', class: 'btn btn-raised btn-info'
 
 - if current_user.needing_tutorial?
   .modal#tutorial
