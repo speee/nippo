@@ -1,7 +1,7 @@
 = form_for @nippo, class: 'form-horizontal' do |f|
   .well
     fieldset
-      .form-group
+      .form-group.label-floating
         label.control-label for="nippo_reported_for" 日付
         = f.text_field(:reported_for, class: 'form-control', tabindex: -1)
         p.help-block 指定した日付の日報として送信されます（件名にも挿入されます）
@@ -15,7 +15,7 @@
               = f.submit 'プレビュー', name: 'preview', class: 'btn btn-raised', tabindex: -1
             li
               = f.submit '日報送信', class: 'btn btn-info btn-raised', tabindex: 2
-              
+
 - if current_user.needing_tutorial?
   .modal#tutorial
     .modal-dialog
