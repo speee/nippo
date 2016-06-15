@@ -24,7 +24,7 @@
 #
 
 class User < ApplicationRecord
-  devise :trackable, :omniauthable
+  devise :trackable, :timeoutable, :omniauthable
   has_one :template
   after_create :create_default_template
 
