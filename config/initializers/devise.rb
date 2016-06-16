@@ -254,8 +254,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2,
-                  Settings.google&.api_client&.id,
-                  Settings.google&.api_client&.secret,
+                  Settings.google&.web_main&.api_client&.id,
+                  Settings.google&.web_main&.api_client&.secret,
                   name: :google,
                   skip_jwt: true,
                   prompt: :consent,

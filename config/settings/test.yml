@@ -1,7 +1,8 @@
 google:
-  api_client:
-    id: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-    secret: 'xxxxxxxxxxxxxxxxxxxxxxxx'
+  web_main:
+    api_client:
+      id: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+      secret: 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
 nippo:
   send_to: 'test@example.com'

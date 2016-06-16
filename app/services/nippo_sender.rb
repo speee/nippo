@@ -38,8 +38,8 @@ class NippoSender
     gmail = Gmail::GmailService.new
     gmail.authorization = Signet::OAuth2::Client.new(
       token_credential_uri: GOOGLE_TOKEN_CREDENTIAL_URI,
-      client_id: Settings.google.api_client.id,
-      client_secret: Settings.google.api_client.secret,
+      client_id: Settings.google.web_main.api_client.id,
+      client_secret: Settings.google.web_main.api_client.secret,
       refresh_token: user.refresh_token,
     )
     gmail.authorization.fetch_access_token!
