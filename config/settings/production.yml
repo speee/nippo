@@ -1,0 +1,2 @@
+auth:
+  use_whitelist: true
