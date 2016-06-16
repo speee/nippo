@@ -6,9 +6,17 @@ db:
   pass: pass
 
 google:
-  api_client:
-    id: xxxx-xxxxxxxxxxxxxx.apps.googleusercontent.com
-    secret: xxxxxxxxxxx
+  web_main:
+    api_client:
+      id: xxxx-xxxxxxxxxxxxxx.apps.googleusercontent.com
+      secret: xxxxxxxxxxx
+
+  whitelist_batch:
+    api_client:
+      id: xxxx-xxxxxxxxxxxxxx.apps.googleusercontent.com
+      secret: xxxxxxxxxxx
+    refresh_token: xxxxxxxxxxxxxxxxxxxx
+    target_group: xxxx@xxxx.xx
 
 nippo:
   send_to: 'xxx@xxxxx.xx'
