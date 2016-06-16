@@ -24,4 +24,48 @@ RSpec.describe User do
       it { is_expected.not_to be_needing_tutorial }
     end
   end
+
+  describe '.validate_auth!' do
+    shared_examples_for 'passing validation' do |email|
+      auth = Hashie::Mash.new
+      auth.info!.email = email
+
+      it 'does NOT raise errors' do
+        expect { User.send(:validate_auth!, auth) }.not_to raise_error
+      end
+    end
+
+    shared_examples_for 'failing validation' do |email|
+      auth = Hashie::Mash.new
+      auth.info!.email = email
+
+      it 'raises errors' do
+        expect { User.send(:validate_auth!, auth) }.to raise_error
+      end
+    end
+
+    context 'when Settings.auth.use_whitelist is true' do
+      before { Settings.auth.use_whitelist = true }
+      after  { Settings.auth.use_whitelist = false }
+
+      context 'when whitelist does NOT contain the email' do
+        it_behaves_like 'failing validation', 'hoge.fuga@speee.jp'
+      end
+
+      context 'when whitelist contains the email' do
+        before { Whitelist::User.create(email: 'hoge.fuga@speee.jp') }
+        it_behaves_like 'passing validation', 'hoge.fuga@speee.jp'
+      end
+    end
+
+    context 'when Settings.auth.use_whitelist is false' do
+      context 'domain is speee' do
+        it_behaves_like 'passing validation', 'hoge.fuga@speee.jp'
+      end
+
+      context 'domain other than speee' do
+        it_behaves_like 'failing validation', 'hoge.fuga@gmail.com'
+      end
+    end
+  end
 end

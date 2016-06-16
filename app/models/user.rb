@@ -57,7 +57,12 @@ class User < ApplicationRecord
     private
 
     def validate_auth!(auth)
-      throw 'This service only for speee member' unless auth.info.email.ends_with?('@speee.jp')
+      email = auth.info.email
+      if Settings.auth.use_whitelist
+        throw "User #{email} is not allowed to access" unless Whitelist::User.find_by(email: email)
+      else
+        throw 'This service only for speee member' unless email.ends_with?('@speee.jp')
+      end
     end
   end
 end

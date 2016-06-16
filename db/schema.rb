@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608103119) do
+ActiveRecord::Schema.define(version: 20160616083324) do
 
   create_table "nippos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "user_id",                    null: false
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 20160608103119) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+  end
+
+  create_table "whitelist_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "email",      limit: 128, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["email"], name: "index_whitelist_users_on_email", unique: true, using: :btree
   end
 
   add_foreign_key "nippos", "users"
