@@ -55,6 +55,7 @@ source 'https://rubygems.org' do
     gem 'rspec-rails'
     gem 'rspec_junit_formatter'
     gem 'simplecov', require: false
+    gem 'validation_examples_matcher'
     gem 'vcr'
     gem 'webmock'
   end

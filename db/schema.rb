@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616083324) do
+ActiveRecord::Schema.define(version: 20160617063534) do
 
   create_table "nippos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer  "user_id",                    null: false
-    t.date     "reported_for",               null: false
+    t.integer  "user_id",                                null: false
+    t.date     "reported_for",                           null: false
     t.text     "subject",      limit: 65535
     t.text     "body",         limit: 65535
     t.datetime "sent_at"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "status",                     default: 0, null: false
     t.index ["sent_at"], name: "index_nippos_on_sent_at", using: :btree
     t.index ["user_id", "reported_for"], name: "index_nippos_on_user_id_and_reported_for", unique: true, using: :btree
     t.index ["user_id"], name: "index_nippos_on_user_id", using: :btree

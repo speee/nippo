@@ -13,16 +13,9 @@ class NipposController < PrivateController
     if params[:back]
       render :new
     elsif params[:preview]
-      if @nippo.valid?
-        render :preview
-      else
-        flash.now[:alert] = @nippo.errors.full_messages
-        render :new
-      end
+      preview
     elsif @nippo.save
-      NippoSender.new(nippo: @nippo).send
-      flash[:notice] = '日報を送信しました'
-      redirect_to root_path
+      send_nippo
     else
       flash.now[:alert] = @nippo.errors.full_messages
       render :new
@@ -36,6 +29,26 @@ class NipposController < PrivateController
   end
 
   private
+
+  def preview
+    if @nippo.valid?
+      render :preview
+    else
+      flash.now[:alert] = @nippo.errors.full_messages
+      render :new
+    end
+  end
+
+  def send_nippo
+    sender = NippoSender.new(nippo: @nippo)
+    if sender.run
+      flash[:notice] = '日報を送信しました'
+      redirect_to root_path
+    else
+      flash[:alert] = sender.errors.full_messages
+      redirect_to nippo_path(@nippo)
+    end
+  end
 
   def nippo_params
     params.require(:nippo).permit(:body, :reported_for).merge(
