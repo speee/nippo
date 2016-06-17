@@ -20,7 +20,7 @@ class NipposController < PrivateController
         render :new
       end
     elsif @nippo.save
-      NippoSender.new(user: current_user, nippo: @nippo).send
+      NippoSender.new(nippo: @nippo).send
       flash[:notice] = '日報を送信しました'
       redirect_to root_path
     else

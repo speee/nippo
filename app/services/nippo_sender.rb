@@ -8,6 +8,11 @@ class NippoSender
   attribute :user,  User
   attribute :nippo, Nippo
 
+  def nippo=(new_nippo)
+    self.user = new_nippo.user
+    super(new_nippo)
+  end
+
   Gmail = Google::Apis::GmailV1
   GOOGLE_TOKEN_CREDENTIAL_URI = 'https://www.googleapis.com/oauth2/v3/token'
   ME = 'me'
