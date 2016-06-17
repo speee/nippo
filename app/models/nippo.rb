@@ -11,6 +11,7 @@
 #  sent_at      :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  status       :integer          default("draft"), not null
 #
 # Indexes
 #
@@ -25,6 +26,12 @@
 
 class Nippo < ApplicationRecord
   belongs_to :user
+
+  enum status: {
+    draft:   0,
+    sending: 1,
+    sent:    2,
+  }
 
   def dated_subject
     subject % reported_for.strftime('%Y/%m/%d')

@@ -4,13 +4,40 @@ require 'nkf'
 
 class NippoSender
   include Virtus.model
+  include ActiveModel::Validations
 
   attribute :user,  User
   attribute :nippo, Nippo
 
+  validates :user, :nippo, presence: true
+  validates_each(:user) do |record, attr, value|
+    record.errors[attr] << 'must own nippo' if record.nippo&.user != value
+  end
+  validates_each(:nippo) do |record, attr, value|
+    next if value.blank?
+    record.errors[attr] << 'must be under draft' unless value.draft?
+  end
+
   def nippo=(new_nippo)
-    self.user = new_nippo.user
     super(new_nippo)
+    self.user = new_nippo&.user
+  end
+
+  def run
+    Nippo.transaction do
+      @nippo.lock!
+      return unless valid?
+      @nippo.update!(status: :sending)
+    end
+
+    begin
+      send_nippo!
+      nippo.update!(sent_at: Time.zone.now, status: :sent)
+    rescue => e
+      nippo.update(status: :draft)
+      errors[:base] << e.message
+      nil
+    end
   end
 
   Gmail = Google::Apis::GmailV1
@@ -20,7 +47,9 @@ class NippoSender
   TEXT_PLANE = 'text/plain; charset=UTF-8'
   RFC822 = 'message/rfc822'
 
-  def send
+  private
+
+  def send_nippo!
     message = RMail::Message.new
     message.header.to              = Settings.nippo.send_to
     message.header.from            = from
@@ -33,11 +62,7 @@ class NippoSender
     gmail_service.send_user_message(ME,
       upload_source: StringIO.new(message.to_s),
       content_type: RFC822)
-
-    nippo.update!(sent_at: Time.zone.now)
   end
-
-  private
 
   def gmail_service
     gmail = Gmail::GmailService.new

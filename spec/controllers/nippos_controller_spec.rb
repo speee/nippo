@@ -20,6 +20,25 @@ RSpec.describe NipposController do
       end.to change(Nippo, :count).by(1)
     end
 
+    context 'when NippoSender#run fails' do
+      let(:sender) { double('NippoSender') }
+      let(:errors) { double('errors') }
+
+      it 'redirects to nippo#show' do
+        allow(NippoSender).to receive(:new) { sender }
+        allow(sender).to receive(:run) { nil }
+        allow(sender).to receive(:errors) { errors }
+        allow(errors).to receive(:full_messages) { 'error!' }
+
+        post :create, nippo: {
+          reported_for: Time.zone.today,
+          body: FFaker::Lorem.paragraph,
+        }
+
+        expect(response).to redirect_to(nippo_path(assigns(:nippo)))
+      end
+    end
+
     context 'with :preview' do
       it 'shows preview' do
         post :create, preview: 'プレビュー', nippo: {
