@@ -1,3 +1,5 @@
-h3 = @nippo.dated_subject
-
-.well = auto_link(@nippo.body).gsub(/(\r\n|\r|\n)/, '<br>').html_safe
+- if @nippo.draft?
+  = render 'shared/nippos/form'
+- else
+  h3 = @nippo.dated_subject
+  .well = auto_link(@nippo.body).gsub(/(\r\n|\r|\n)/, '<br>').html_safe

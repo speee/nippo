@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :welcome, only: %i(show)
 
   resource :template, only: %i(show update)
-  resources :nippos, only: %i(new create show)
+  resources :nippos, only: %i(new create show update)
   resource :me, only: %i(show)
 
   devise_for :users, controllers: {
