@@ -2,23 +2,23 @@
 ruby '2.3.1'
 
 source 'https://rubygems.org' do
-  gem 'coffee-rails', '~> 4.1.0'
+  gem 'coffee-rails'
   gem 'config'
   gem 'devise'
   gem 'google-api-client'
-  gem 'jbuilder', '~> 2.0'
+  gem 'jbuilder'
   gem 'jquery-rails'
-  gem 'mysql2', '>= 0.3.18', '< 0.5'
+  gem 'mysql2'
   gem 'omniauth'
   gem 'omniauth-google-oauth2'
-  gem 'puma', '~> 3.0'
-  gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+  gem 'puma'
+  gem 'rails', '5.0.0'
   gem 'rinku', require: 'rails_rinku'
   gem 'rmail'
-  gem 'sass-rails', '~> 5.0'
+  gem 'sass-rails'
   gem 'slim-rails'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-  gem 'uglifier', '>= 1.3.0'
+  gem 'uglifier'
   gem 'virtus'
   gem 'whenever', require: false
 
@@ -32,12 +32,12 @@ source 'https://rubygems.org' do
     gem 'better_errors'
     gem 'bullet', group: :test
     gem 'byebug', platform: :mri, group: :test
-    gem 'listen', '~> 3.0.5'
+    gem 'listen'
     gem 'pry-byebug', group: :test
     gem 'pry-rails', group: :test
     gem 'rubocop', require: false
     gem 'spring'
-    gem 'spring-watcher-listen', '~> 2.0.0'
+    gem 'spring-watcher-listen'
     gem 'web-console'
   end
 
