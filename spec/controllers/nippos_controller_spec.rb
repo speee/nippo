@@ -38,40 +38,6 @@ RSpec.describe NipposController do
         expect(response).to redirect_to(nippo_path(assigns(:nippo)))
       end
     end
-
-    context 'with :preview' do
-      it 'shows preview' do
-        post :create, preview: 'プレビュー', nippo: {
-          reported_for: Time.zone.today,
-          body: FFaker::Lorem.paragraph,
-        }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:preview)
-      end
-    end
-
-    context 'with :draft' do
-      it 'creates draft and redirects to show' do
-        expect do
-          post :create, draft: '下書き保存', nippo: {
-            reported_for: Time.zone.today,
-            body: FFaker::Lorem.paragraph,
-          }
-        end.to change(Nippo, :count).by(1)
-        expect(response).to redirect_to(nippo_path(assigns(:nippo)))
-      end
-    end
-
-    context 'with :back' do
-      it 'shows form' do
-        post :create, back: '戻る', nippo: {
-          reported_for: Time.zone.today,
-          body: FFaker::Lorem.paragraph,
-        }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:new)
-      end
-    end
   end
 
   describe 'PATCH update' do
@@ -82,32 +48,6 @@ RSpec.describe NipposController do
         patch :update, id: nippo.id, nippo: { body: 'changed' }
         nippo.reload
       end.to change(nippo, :body).and change(nippo, :status).from('draft').to('sent')
-    end
-
-    context 'with :preview' do
-      it 'shows preview' do
-        patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:preview)
-      end
-    end
-
-    context 'with :draft' do
-      it 'updates draft and redirects to show' do
-        expect do
-          patch :update, id: nippo.id, draft: '下書き保存', nippo: { body: 'changed' }
-          nippo.reload
-        end.to change(nippo, :body)
-        expect(response).to redirect_to(nippo_path(nippo))
-      end
-    end
-
-    context 'with :back' do
-      it 'shows form' do
-        patch :update, id: nippo.id, back: '戻る', nippo: { body: 'changed' }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:show)
-      end
     end
 
     context 'nippo has already sent' do
