@@ -1,6 +1,4 @@
 = form_for @nippo, class: 'form-horizontal' do |f|
-  - if @nippo.id
-    = f.hidden_field(:id)
   .well
     fieldset
       - if @nippo.persisted?

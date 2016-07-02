@@ -12,7 +12,7 @@ RSpec.describe Nippos::PreviewsController do
   end
 
   describe 'PATCH update' do
-    let(:nippo) { FG.create(:nippo) }
+    let(:nippo) { FG.create(:nippo, user: current_user) }
 
     it 'shows preview' do
       patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' }
@@ -26,6 +26,15 @@ RSpec.describe Nippos::PreviewsController do
       it 'redirects show' do
         patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' }
         expect(response).to redirect_to(nippo_path(nippo))
+      end
+    end
+
+    context 'when nippo is owned by other' do
+      let(:nippo) { FG.create(:nippo) }
+
+      it 'returns 404' do
+        expect { patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } }
+          .to raise_error(ActionController::RoutingError)
       end
     end
   end

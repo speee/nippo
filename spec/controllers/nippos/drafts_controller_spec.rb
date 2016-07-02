@@ -13,7 +13,7 @@ RSpec.describe Nippos::DraftsController do
   end
 
   describe 'PATCH update' do
-    let(:nippo) { FG.create(:nippo) }
+    let(:nippo) { FG.create(:nippo, user: current_user) }
     it 'updates draft and redirects to show' do
       expect do
         patch :update, id: nippo.id, draft: '下書き保存', nippo: { body: 'changed' }
@@ -28,6 +28,15 @@ RSpec.describe Nippos::DraftsController do
       it 'redirects show' do
         patch :update, id: nippo.id, draft: '下書き保存', nippo: { body: 'changed' }
         expect(response).to redirect_to(nippo_path(nippo))
+      end
+    end
+
+    context 'when nippo is owned by other' do
+      let(:nippo) { FG.create(:nippo) }
+
+      it 'returns 404' do
+        expect { patch :update, id: nippo.id, draft: '下書き保存', nippo: { body: 'changed' } }
+          .to raise_error(ActionController::RoutingError)
       end
     end
   end
