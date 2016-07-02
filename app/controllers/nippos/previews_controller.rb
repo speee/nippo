@@ -3,7 +3,6 @@ class Nippos::PreviewsController < PrivateController
   include NippoHandleable
 
   def create
-    @nippo = Nippo.new(nippo_create_params)
     if @nippo.valid?
       render 'nippos/preview'
     else

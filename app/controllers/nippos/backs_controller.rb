@@ -3,7 +3,6 @@ class Nippos::BacksController < PrivateController
   include NippoHandleable
 
   def create
-    @nippo = Nippo.new(nippo_create_params)
     render 'nippos/new'
   end
 

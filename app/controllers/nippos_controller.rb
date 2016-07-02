@@ -10,7 +10,7 @@ class NipposController < PrivateController
   end
 
   def create
-    if @nippo = Nippo.create(nippo_create_params)
+    if @nippo.save
       send_nippo
     else
       flash.now[:alert] = @nippo.errors.full_messages

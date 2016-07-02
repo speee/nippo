@@ -3,7 +3,6 @@ class Nippos::DraftsController < PrivateController
   include NippoHandleable
 
   def create
-    @nippo = Nippo.new(nippo_create_params)
     if @nippo.save
       flash[:notice] = '日報を下書き保存しました'
       redirect_to nippo_path(@nippo)
