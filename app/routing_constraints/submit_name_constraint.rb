@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 class SubmitNameConstraint
-  include Virtus.model
+  attr_reader :name
 
-  attribute :name, Symbol
+  def initialize(name)
+    @name = name.to_sym
+  end
 
   def matches?(request)
     request.params[name]

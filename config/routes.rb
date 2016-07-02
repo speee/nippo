@@ -10,15 +10,15 @@ Rails.application.routes.draw do
   resources :nippos,
     controller: 'nippos/backs',
     only: %i(create update),
-    constraints: SubmitNameConstraint.new(name: :back)
+    constraints: SubmitNameConstraint.new(:back)
   resources :nippos,
     controller: 'nippos/previews',
     only: %i(create update),
-    constraints: SubmitNameConstraint.new(name: :preview)
+    constraints: SubmitNameConstraint.new(:preview)
   resources :nippos,
     controller: 'nippos/drafts',
     only: %i(create update),
-    constraints: SubmitNameConstraint.new(name: :draft)
+    constraints: SubmitNameConstraint.new(:draft)
 
   resources :nippos, only: %i(new create show update)
 
