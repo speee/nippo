@@ -43,7 +43,13 @@ html
           button.close type="button" data-dismiss="alert" aria-label="Close"
             span aria-hidden="true"
               | &times;
-          = alert
+          - case alert
+          - when Array
+            ul
+              - alert.each do |mes|
+                li = mes
+          - else
+            = alert
 
       = content_for?(:content) ? yield(:content) : yield
 

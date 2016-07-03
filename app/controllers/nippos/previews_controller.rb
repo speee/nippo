@@ -6,7 +6,7 @@ class Nippos::PreviewsController < PrivateController
     if @nippo.valid?
       render 'nippos/preview'
     else
-      flash.now[:alert] = @nippo.errors.full_messages
+      flash.now[:alert] = @nippo.errors.values.flatten
       render 'nippos/new'
     end
   end
@@ -16,7 +16,7 @@ class Nippos::PreviewsController < PrivateController
     if @nippo.valid?
       render 'nippos/preview'
     else
-      flash.now[:alert] = @nippo.errors.full_messages
+      flash.now[:alert] = @nippo.errors.values.flatten
       render 'nippos/show'
     end
   end
