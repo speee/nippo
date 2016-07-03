@@ -38,47 +38,68 @@ RSpec.describe NipposController do
         expect(response).to redirect_to(nippo_path(assigns(:nippo)))
       end
     end
+  end
 
-    context 'with :preview' do
-      it 'shows preview' do
-        post :create, preview: 'プレビュー', nippo: {
-          reported_for: Time.zone.today,
-          body: FFaker::Lorem.paragraph,
-        }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:preview)
+  describe 'PATCH update' do
+    let(:nippo) { FG.create(:nippo, user: current_user) }
+
+    it 'updates nippo', :vcr do
+      expect do
+        patch :update, id: nippo.id, nippo: { body: 'changed' }
+        nippo.reload
+      end.to change(nippo, :body).and change(nippo, :status).from('draft').to('sent')
+    end
+
+    context 'nippo has already sent' do
+      before { nippo.update(status: :sent) }
+
+      it 'redirects show' do
+        patch :update, id: nippo.id, nippo: { body: 'changed' }
+        expect(response).to redirect_to(nippo_path(nippo))
       end
     end
 
-    context 'with :back' do
-      it 'shows form' do
-        post :create, back: '戻る', nippo: {
-          reported_for: Time.zone.today,
-          body: FFaker::Lorem.paragraph,
-        }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:new)
+    context 'when nippo is owned by other' do
+      let(:nippo) { FG.create(:nippo) }
+
+      it 'returns 404' do
+        expect { patch :update, id: nippo.id, nippo: { body: 'changed' } }
+          .to raise_error(ActionController::RoutingError)
       end
     end
   end
 
   describe 'GET show' do
-    let(:nippo) { FG.create(:nippo) }
+    let(:nippo) { FG.create(:nippo, user: current_user) }
 
-    it 'shows nippo' do
-      get :show, id: nippo.id
-      expect(assigns(:nippo)).to eq nippo
+    context 'when nippo is draft' do
+      it 'does NOT create reaction object' do
+        expect { get :show, id: nippo.id }
+          .not_to change { Reaction.find_by(user: current_user, nippo: nippo)&.page_view || 0 }
+        expect(assigns(:nippo)).to eq nippo
+      end
+
+      context 'when nippo is owned by other' do
+        let(:nippo) { FG.create(:nippo) }
+        it 'returns 404' do
+          expect { get :show, id: nippo.id }.to raise_error(ActionController::RoutingError)
+        end
+      end
     end
 
-    it 'creates reaction object and sets pv as 1' do
-      get :show, id: nippo.id
-      expect(Reaction.find_by(user: current_user, nippo: nippo).page_view).to eq 1
-    end
+    context 'when nippo was sent' do
+      let(:nippo) { FG.create(:nippo, status: :sent) }
 
-    it 'increment existing reaction page view' do
-      get :show, id: nippo.id
-      expect { get :show, id: nippo.id }
-        .to change { Reaction.find_by(user: current_user, nippo: nippo).page_view }.by(1)
+      it 'creates reaction object and sets pv as 1' do
+        get :show, id: nippo.id
+        expect(Reaction.find_by(user: current_user, nippo: nippo).page_view).to eq 1
+      end
+
+      it 'increment existing reaction page view' do
+        get :show, id: nippo.id
+        expect { get :show, id: nippo.id }
+          .to change { Reaction.find_by(user: current_user, nippo: nippo).page_view }.by(1)
+      end
     end
   end
 end

@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 ENV['RAILS_ENV'] ||= 'test'
+
+require 'simplecov'
+# SimpleCov.minimum_coverage 90
+SimpleCov.start 'rails'
+
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'

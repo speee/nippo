@@ -1,3 +1,9 @@
-h3 = @nippo.dated_subject
+- if @nippo.draft?
+  p
+    span.label.label-info 下書き
 
-.well = auto_link(@nippo.body).gsub(/(\r\n|\r|\n)/, '<br>').html_safe
+  = render 'shared/nippos/form'
+
+- else
+  h3 = @nippo.dated_subject
+  .well = auto_link(@nippo.body).gsub(/(\r\n|\r|\n)/, '<br>').html_safe

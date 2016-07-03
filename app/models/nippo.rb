@@ -33,6 +33,12 @@ class Nippo < ApplicationRecord
     sent:    2,
   }
 
+  validates_each :subject, :body do |record, attr, _value|
+    if record.changed.member?(attr.to_s) && record.status_was != 'draft'
+      record.errors[attr] << 'can be changed only in draft'
+    end
+  end
+
   def dated_subject
     subject % reported_for.strftime('%Y/%m/%d')
   end

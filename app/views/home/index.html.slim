@@ -1,3 +1,5 @@
+= render 'shared/nippos/notice_draft'
+
 .btn-group-vertical.col-md-12
   - @recent_nippos.each do |nippo|
     = link_to nippo.dated_subject, nippo, class: 'btn btn-raised', style: 'text-align:left !important'

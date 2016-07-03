@@ -1,0 +1,7 @@
+- if current_user.last_nippo&.draft?
+  .alert.alert-success.alert-dismissible role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="Close"
+      span aria-hidden="true"
+        | &times;
+    | 下書き中の日報があります 
+    = link_to '編集する', current_user.last_nippo, class: 'btn btn-raised btn-primary'

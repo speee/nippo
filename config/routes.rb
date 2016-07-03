@@ -5,8 +5,22 @@ Rails.application.routes.draw do
   resource :welcome, only: %i(show)
 
   resource :template, only: %i(show update)
-  resources :nippos, only: %i(new create show)
   resource :me, only: %i(show)
+
+  resources :nippos,
+    controller: 'nippos/backs',
+    only: %i(create update),
+    constraints: SubmitNameConstraint.new(:back)
+  resources :nippos,
+    controller: 'nippos/previews',
+    only: %i(create update),
+    constraints: SubmitNameConstraint.new(:preview)
+  resources :nippos,
+    controller: 'nippos/drafts',
+    only: %i(create update),
+    constraints: SubmitNameConstraint.new(:draft)
+
+  resources :nippos, only: %i(new create show update)
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
