@@ -4,6 +4,33 @@ RSpec.describe Nippo do
 
   it { is_expected.to be_valid }
 
+  describe 'uniqueness validation' do
+    let(:user) { FG.create(:user) }
+    let(:reported_for) { Time.zone.today }
+    subject { FG.build(:nippo, user: user) }
+
+    context 'when written nippo owner is NOT current user' do
+      before { FG.create(:nippo, reported_for: reported_for) }
+
+      it { is_expected.to be_valid_on(:reported_for).with(reported_for) }
+      it { is_expected.to be_valid_on(:reported_for).with(reported_for - 1) }
+    end
+
+    context 'when written nippo owner is same as current user' do
+      before { FG.create(:nippo, reported_for: reported_for, user: user) }
+
+      it { is_expected.to be_invalid_on(:reported_for).with(reported_for) }
+      it { is_expected.to be_valid_on(:reported_for).with(reported_for - 1) }
+    end
+  end
+
+  describe 'fix validation after sent' do
+    subject { FG.create(:nippo, status: :sent) }
+
+    it { is_expected.to be_invalid_on(:subject).with('changed') }
+    it { is_expected.to be_invalid_on(:body).with('changed') }
+  end
+
   describe '#dated_subject' do
     before do
       subject.subject = 'pre %s post'
