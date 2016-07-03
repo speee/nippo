@@ -32,6 +32,10 @@ class User < ApplicationRecord
     !template.user_updated?
   end
 
+  def last_nippo
+    @last_nippo ||= Nippo.where(user: self).order(reported_for: :desc).first
+  end
+
   private
 
   def create_default_template

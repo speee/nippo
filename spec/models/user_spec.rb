@@ -25,6 +25,23 @@ RSpec.describe User do
     end
   end
 
+  describe '#last_nippo' do
+    context 'when user has NOT written nippo' do
+      it 'returns nil' do
+        expect(subject.last_nippo).to be_nil
+      end
+    end
+
+    context 'when user has written nippos' do
+      let(:expected) { FG.create(:nippo, user: subject) }
+      before { FG.create(:nippo, user: subject, reported_for: expected.reported_for - 1) }
+
+      it 'returns last nippo' do
+        expect(subject.last_nippo).to eq expected
+      end
+    end
+  end
+
   describe '.validate_auth!' do
     shared_examples_for 'passing validation' do |email|
       auth = Hashie::Mash.new
