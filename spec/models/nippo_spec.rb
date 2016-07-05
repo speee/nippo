@@ -43,36 +43,60 @@ RSpec.describe Nippo do
   end
 
   describe '.default_report_date' do
-    shared_examples '.default_report_date' do |input, output|
-      let(:now) { Time.zone.parse(input) }
-      let(:expected) { Date.parse(output) }
+    let(:input_time) { Time.zone.parse(input) }
+    let(:expected_date) { Date.parse(expected) }
 
-      it 'returns expected date' do
-        expect(Nippo.default_report_date(now)).to eq expected
+    context 'Mon-Fri after 10AM' do
+      where(:input, :expected) do
+        [
+          ['2016-06-06 10:00', '2016-06-06'],
+          ['2016-06-07 10:00', '2016-06-07'],
+          ['2016-06-08 10:00', '2016-06-08'],
+          ['2016-06-09 10:00', '2016-06-09'],
+          ['2016-06-10 10:00', '2016-06-10'],
+        ]
+      end
+
+      with_them do
+        it 'returns the same date' do
+          expect(Nippo.default_report_date(input_time)).to eq expected_date
+        end
       end
     end
 
-    context 'Mon-Fri after 10AM' do
-      include_examples '.default_report_date', '2016-06-06 10:00', '2016-06-06'
-      include_examples '.default_report_date', '2016-06-07 10:00', '2016-06-07'
-      include_examples '.default_report_date', '2016-06-08 10:00', '2016-06-08'
-      include_examples '.default_report_date', '2016-06-09 10:00', '2016-06-09'
-      include_examples '.default_report_date', '2016-06-10 10:00', '2016-06-10'
-    end
-
     context 'Tue-Fri before 10AM' do
-      include_examples '.default_report_date', '2016-06-07 09:59', '2016-06-06'
-      include_examples '.default_report_date', '2016-06-08 09:59', '2016-06-07'
-      include_examples '.default_report_date', '2016-06-09 09:59', '2016-06-08'
-      include_examples '.default_report_date', '2016-06-10 09:59', '2016-06-09'
+      where(:input, :expected) do
+        [
+          ['2016-06-07 09:59', '2016-06-06'],
+          ['2016-06-08 09:59', '2016-06-07'],
+          ['2016-06-09 09:59', '2016-06-08'],
+          ['2016-06-10 09:59', '2016-06-09'],
+        ]
+      end
+
+      with_them do
+        it 'returns the day before' do
+          expect(Nippo.default_report_date(input_time)).to eq expected_date
+        end
+      end
     end
 
     context 'before Mon 10AM' do
-      include_examples '.default_report_date', '2016-06-11 09:59', '2016-06-10'
-      include_examples '.default_report_date', '2016-06-11 10:00', '2016-06-10'
-      include_examples '.default_report_date', '2016-06-12 09:59', '2016-06-10'
-      include_examples '.default_report_date', '2016-06-12 10:00', '2016-06-10'
-      include_examples '.default_report_date', '2016-06-13 09:59', '2016-06-10'
+      where(:input, :expected) do
+        [
+          ['2016-06-11 09:59', '2016-06-10'],
+          ['2016-06-11 10:00', '2016-06-10'],
+          ['2016-06-12 09:59', '2016-06-10'],
+          ['2016-06-12 10:00', '2016-06-10'],
+          ['2016-06-13 09:59', '2016-06-10'],
+        ]
+      end
+
+      with_them do
+        it 'returns the day of last friday' do
+          expect(Nippo.default_report_date(input_time)).to eq expected_date
+        end
+      end
     end
   end
 end
