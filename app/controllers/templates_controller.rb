@@ -15,6 +15,7 @@ class TemplatesController < PrivateController
       flash[:first_update] = first_update
       redirect_to template_path
     else
+      flash.now[:alert] = @template.errors.values.flatten
       render :show
     end
   end

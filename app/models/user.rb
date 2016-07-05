@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_one :template
   after_create :create_default_template
 
+  AuthError = Class.new(StandardError)
+
   def needing_tutorial?
     !template.user_updated?
   end
@@ -63,9 +65,9 @@ class User < ApplicationRecord
     def validate_auth!(auth)
       email = auth.info.email
       if Settings.auth.use_whitelist
-        throw "User #{email} is not allowed to access" unless Whitelist::User.find_by(email: email)
+        raise AuthError, "User #{email} is not allowed to access" unless Whitelist::User.find_by(email: email)
       else
-        throw 'This service only for speee member' unless email.ends_with?('@speee.jp')
+        raise AuthError, 'This service only for speee member' unless email.ends_with?('@speee.jp')
       end
     end
   end
