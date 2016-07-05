@@ -24,6 +24,8 @@
 class Template < ApplicationRecord
   belongs_to :user
 
+  validates :subject, presence: true
+
   def cc=(val)
     ary = RMail::Address.parse(val).format
     joined = ary.empty? ? nil : ary.join(',')
