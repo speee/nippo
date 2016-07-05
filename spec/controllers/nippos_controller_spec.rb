@@ -22,6 +22,19 @@ RSpec.describe NipposController do
       end.to change(Nippo, :count).by(1)
     end
 
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        post :create, params: {
+          nippo: {
+            reported_for: Time.zone.today,
+            body: '',
+          },
+        }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:new)
+      end
+    end
+
     context 'when NippoSender#run fails' do
       let(:sender) { double('NippoSender') }
       let(:errors) { double('errors') }
@@ -52,6 +65,14 @@ RSpec.describe NipposController do
         patch :update, params: { id: nippo.id, nippo: { body: 'changed' } }
         nippo.reload
       end.to change(nippo, :body).and change(nippo, :status).from('draft').to('sent')
+    end
+
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        patch :update, params: { id: nippo.id, nippo: { body: '' } }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:show)
+      end
     end
 
     context 'nippo has already sent' do

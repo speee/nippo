@@ -13,6 +13,20 @@ RSpec.describe Nippos::DraftsController do
       end.to change(Nippo, :count).by(1)
       expect(response).to redirect_to(nippo_path(assigns(:nippo)))
     end
+
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        post :create, params: {
+          draft: '下書き保存',
+          nippo: {
+            reported_for: Time.zone.today,
+            body: '',
+          },
+        }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:new)
+      end
+    end
   end
 
   describe 'PATCH update' do
@@ -23,6 +37,14 @@ RSpec.describe Nippos::DraftsController do
         nippo.reload
       end.to change(nippo, :body)
       expect(response).to redirect_to(nippo_path(nippo))
+    end
+
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        patch :update, params: { id: nippo.id, draft: '下書き保存', nippo: { body: '' } }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:show)
+      end
     end
 
     context 'nippo has already sent' do

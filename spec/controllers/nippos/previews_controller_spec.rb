@@ -12,6 +12,20 @@ RSpec.describe Nippos::PreviewsController do
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:preview)
     end
+
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        post :create, params: {
+          preview: 'プレビュー',
+          nippo: {
+            reported_for: Time.zone.today,
+            body: '',
+          },
+        }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:new)
+      end
+    end
   end
 
   describe 'PATCH update' do
@@ -21,6 +35,14 @@ RSpec.describe Nippos::PreviewsController do
       patch :update, params: { id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:preview)
+    end
+
+    context 'when nippo is invalid' do
+      it 'show alert and form' do
+        patch :update, params: { id: nippo.id, preview: 'プレビュー', nippo: { body: '' } }
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template(:show)
+      end
     end
 
     context 'nippo has already sent' do
