@@ -42,6 +42,34 @@ RSpec.describe User do
     end
   end
 
+  describe '.find_for_google' do
+    let(:auth) do
+      Hashie::Mash.new(
+        provider: subject.provider,
+        uid: subject.uid,
+        info: {
+          name: subject.name,
+          email: subject.email,
+          image: subject.image,
+        },
+        credentials: { refresh_token: subject.refresh_token },
+      )
+    end
+
+    context 'when it is first login' do
+      it 'creates new user' do
+        expect { User.find_for_google(auth) }.to change(User, :count).by(1)
+      end
+    end
+
+    context 'when after second login' do
+      before { subject.save }
+      it 'returns existing user' do
+        expect(User.find_for_google(auth)).to eq subject
+      end
+    end
+  end
+
   describe '.validate_auth!' do
     shared_examples_for 'passing validation' do |email|
       auth = Hashie::Mash.new
