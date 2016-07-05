@@ -15,12 +15,14 @@ RSpec.describe TemplatesController do
     let(:cc_after) { FFaker::Internet.safe_email }
 
     it 'updates template and redirects to :show' do
-      patch :update, template: {
-        id: current_user.template.id,
-        subject: subject_after,
-        body: body_after,
-        from_name: from_name_after,
-        cc: cc_after,
+      patch :update, params: {
+        template: {
+          id: current_user.template.id,
+          subject: subject_after,
+          body: body_after,
+          from_name: from_name_after,
+          cc: cc_after,
+        },
       }
 
       expect(response).to redirect_to(template_path)

@@ -6,7 +6,7 @@ module PrivateControllerTestHelpers
 end
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include PrivateControllerTestHelpers, type: :controller
   config.before(:each, type: :controller) do
     sign_in current_user

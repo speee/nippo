@@ -2,9 +2,12 @@
 RSpec.describe Nippos::PreviewsController do
   describe 'POST create' do
     it 'shows preview' do
-      post :create, preview: 'プレビュー', nippo: {
-        reported_for: Time.zone.today,
-        body: FFaker::Lorem.paragraph,
+      post :create, params: {
+        preview: 'プレビュー',
+        nippo: {
+          reported_for: Time.zone.today,
+          body: FFaker::Lorem.paragraph,
+        },
       }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:preview)
@@ -15,7 +18,7 @@ RSpec.describe Nippos::PreviewsController do
     let(:nippo) { FG.create(:nippo, user: current_user) }
 
     it 'shows preview' do
-      patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' }
+      patch :update, params: { id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:preview)
     end
@@ -24,7 +27,7 @@ RSpec.describe Nippos::PreviewsController do
       before { nippo.update(status: :sent) }
 
       it 'redirects show' do
-        patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' }
+        patch :update, params: { id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } }
         expect(response).to redirect_to(nippo_path(nippo))
       end
     end
@@ -33,7 +36,7 @@ RSpec.describe Nippos::PreviewsController do
       let(:nippo) { FG.create(:nippo) }
 
       it 'returns 404' do
-        expect { patch :update, id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } }
+        expect { patch :update, params: { id: nippo.id, preview: 'プレビュー', nippo: { body: 'changed' } } }
           .to raise_error(ActionController::RoutingError)
       end
     end

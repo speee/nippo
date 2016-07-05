@@ -57,7 +57,7 @@ RSpec.describe User do
       auth.info!.email = email
 
       it 'raises errors' do
-        expect { User.send(:validate_auth!, auth) }.to raise_error
+        expect { User.send(:validate_auth!, auth) }.to raise_error(User::AuthError)
       end
     end
 
