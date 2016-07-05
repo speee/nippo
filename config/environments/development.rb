@@ -22,6 +22,8 @@ Rails.application.configure do
   config.assets.debug = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.logger = Logger.new(Rails.root.join('log', 'development.log'), 1, 100 * 1024)
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true

@@ -16,6 +16,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :stderr
 
+  config.logger = Logger.new(Rails.root.join('log', 'test.log'), 1, 100 * 1024)
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true
