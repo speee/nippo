@@ -43,7 +43,7 @@ class NippoSender
   Gmail = Google::Apis::GmailV1
   GOOGLE_TOKEN_CREDENTIAL_URI = 'https://www.googleapis.com/oauth2/v3/token'
   ME = 'me'
-  SUBJECT_ENCODING = '-wM'
+  SUBJECT_ENCODING = '-wWM'
   TEXT_PLANE = 'text/plain; charset=UTF-8'
   RFC822 = 'message/rfc822'
 

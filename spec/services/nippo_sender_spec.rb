@@ -59,5 +59,13 @@ RSpec.describe NippoSender do
         expect(NKF.nkf('-mw', @actual)).to eq "日本語 <#{user.email}>"
       end
     end
+
+    context 'when NKF.guess failing name' do
+      before { template.update(from_name: '有國') }
+      it 'returns MIME encoded' do
+        @actual = subject.send(:from)
+        expect(NKF.nkf('-mw', @actual)).to eq "有國 <#{user.email}>"
+      end
+    end
   end
 end
