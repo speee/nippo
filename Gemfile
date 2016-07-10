@@ -2,6 +2,7 @@
 ruby '2.3.1'
 
 source 'https://rubygems.org' do
+  gem 'active_decorator'
   gem 'cancancan'
   gem 'coffee-rails'
   gem 'config'
@@ -56,6 +57,7 @@ source 'https://rubygems.org' do
     gem 'rspec-rails'
     gem 'rspec_junit_formatter'
     gem 'simplecov', require: false
+    gem 'timecop'
     gem 'validation_examples_matcher'
     gem 'vcr'
     gem 'webmock'

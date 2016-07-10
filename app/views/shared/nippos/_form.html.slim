@@ -10,7 +10,7 @@
           label.control-label for="nippo_reported_for" 日付
           = f.text_field(:reported_for, class: 'form-control', tabindex: -1)
           p.help-block 指定した日付の日報として送信されます（件名にも挿入されます）
-          p.date-notice ← 昨日の日付です
+          = @nippo.date_notice
       .form-group.label-floating
         label.control-label for="nippo_body" 本文
         = f.text_area(:body, rows: 40, class: 'form-control', tabindex: 1)
