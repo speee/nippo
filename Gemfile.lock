@@ -354,7 +354,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    timecop (0.8.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -443,7 +442,6 @@ DEPENDENCIES
   slim-rails!
   spring!
   spring-watcher-listen!
-  timecop!
   tzinfo-data!
   uglifier!
   validation_examples_matcher!

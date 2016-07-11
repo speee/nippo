@@ -17,7 +17,7 @@ RSpec.describe NippoDecorator, type: :decorator do
 
       with_them do
         it 'returns false' do
-          Timecop.travel(now) do
+          travel_to(now) do
             expect(subject.send(:needs_date_notice?)).to eq false
           end
         end
@@ -36,7 +36,7 @@ RSpec.describe NippoDecorator, type: :decorator do
 
       with_them do
         it 'returns false' do
-          Timecop.travel(now) do
+          travel_to(now) do
             expect(subject.send(:needs_date_notice?)).to eq true
           end
         end
@@ -53,7 +53,7 @@ RSpec.describe NippoDecorator, type: :decorator do
 
       with_them do
         it 'returns expected result' do
-          Timecop.travel(now) do
+          travel_to(now) do
             expect(subject.send(:needs_date_notice?)).to eq expected
           end
         end
@@ -75,7 +75,7 @@ RSpec.describe NippoDecorator, type: :decorator do
     context 'when default reported_for is today' do
       before { subject.reported_for = Date.new(2016, 7, 1) }
       it 'returns tag' do
-        Timecop.travel(Time.zone.local(2016, 7, 1, 10)) do
+        travel_to(Time.zone.local(2016, 7, 1, 10)) do
           expect(subject.date_notice).to eq '<p class="date-notice">← 今日の日付です</p>'
         end
       end
@@ -84,7 +84,7 @@ RSpec.describe NippoDecorator, type: :decorator do
     context 'when default reported_for is yesterday' do
       before { subject.reported_for = Date.new(2016, 7, 4) }
       it 'returns tag' do
-        Timecop.travel(Time.zone.local(2016, 7, 5, 10)) do
+        travel_to(Time.zone.local(2016, 7, 5, 10)) do
           expect(subject.date_notice).to eq '<p class="date-notice">← 昨日の日付です</p>'
         end
       end
@@ -93,7 +93,7 @@ RSpec.describe NippoDecorator, type: :decorator do
     context 'when default reported_for is last friday' do
       before { subject.reported_for = Date.new(2016, 7, 1) }
       it 'returns tag' do
-        Timecop.travel(Time.zone.local(2016, 7, 4, 10)) do
+        travel_to(Time.zone.local(2016, 7, 4, 10)) do
           expect(subject.date_notice).to eq '<p class="date-notice">← 金曜日の日付です</p>'
         end
       end
