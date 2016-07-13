@@ -1,0 +1,26 @@
+.form-group.date-noticing {
+  .date-notice {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 16px;
+    color: white;
+    background: rgba(101, 101, 101, 0.9);
+    padding: 7px;
+    border-radius: 2px;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+
+    animation: date-notice 300ms ease 1s 6 alternate;
+  }
+
+  @keyframes date-notice {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}

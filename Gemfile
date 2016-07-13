@@ -2,6 +2,7 @@
 ruby '2.3.1'
 
 source 'https://rubygems.org' do
+  gem 'active_decorator'
   gem 'cancancan'
   gem 'coffee-rails'
   gem 'config'
