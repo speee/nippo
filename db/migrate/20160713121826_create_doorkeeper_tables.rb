@@ -2,7 +2,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
   def change
     create_table :oauth_applications do |t|
       t.string  :name,         null: false
-      t.string  :uid,          null: false
+      t.string  :uid,          null: false, limit:190
       t.string  :secret,       null: false
       t.text    :redirect_uri, null: false
       t.string  :scopes,       null: false, default: ''
@@ -14,7 +14,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
     create_table :oauth_access_grants do |t|
       t.integer  :resource_owner_id, null: false
       t.references :application,     null: false
-      t.string   :token,             null: false
+      t.string   :token,             null: false, limit:190
       t.integer  :expires_in,        null: false
       t.text     :redirect_uri,      null: false
       t.datetime :created_at,        null: false
@@ -39,9 +39,9 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
       # https://github.com/doorkeeper-gem/doorkeeper/tree/v3.0.0.rc1#custom-access-token-generator
       #
       # t.text     :token,             null: false
-      t.string   :token,                  null: false
+      t.string   :token,                  null: false, limit:190
 
-      t.string   :refresh_token
+      t.string   :refresh_token, limit:190
       t.integer  :expires_in
       t.datetime :revoked_at
       t.datetime :created_at,             null: false
