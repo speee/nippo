@@ -7,7 +7,8 @@ Doorkeeper.configure do
     current_user || warden.authenticate!(:scope => :user)
   end
 
-  # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
+  # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare
+  # the block below.
   # admin_authenticator do
   #   # Put your admin authentication logic here.
   #   # Example implementation:
@@ -62,7 +63,8 @@ Doorkeeper.configure do
   # access_token_methods :from_bearer_authorization, :from_access_token_param, :from_bearer_param
 
   # Change the native redirect uri for client apps
-  # When clients register with the following redirect uri, they won't be redirected to any server and the authorization code will be displayed within the provider
+  # When clients register with the following redirect uri, they won't be redirected to any server and the authorization
+  # code will be displayed within the provider
   # The value can be any string. Use nil to disable this feature. When disabled, clients must provide a valid URL
   # (Similar behaviour: https://developers.google.com/accounts/docs/OAuth2InstalledApp#choosingredirecturi)
   #
