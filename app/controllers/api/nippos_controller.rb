@@ -1,4 +1,4 @@
-class Api::NipposController < PrivateController
+class Api::NipposController < Api::ApiController
   include NippoHandleable
 
   def index
