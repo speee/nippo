@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :nippos, only: %i(new create show update)
 
-  namespace :api, { format: 'json' } do
+  namespace :api, format: 'json' do
     resources :nippos, only: %i(index)
   end
 

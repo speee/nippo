@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Api::ApiController < ApplicationController
   before_action :doorkeeper_authorize!
   helper_method :current_user

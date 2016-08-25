@@ -8,7 +8,7 @@ RSpec.describe Api::NipposController do
   end
 
   describe 'GET index' do
-    let(:token) { double :acceptable? => true }
+    let(:token) { double acceptable?: true }
     let(:user) { FG.create(:user) }
     before do
       controller.stub(:doorkeeper_token) { token }
