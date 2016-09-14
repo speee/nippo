@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20160713121826) do
     t.index ["user_id"], name: "index_templates_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "ユーザー情報" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "email",              limit: 128,             null: false
     t.string   "provider",           limit: 32,              null: false
     t.string   "uid",                limit: 32,              null: false
