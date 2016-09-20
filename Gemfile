@@ -17,7 +17,7 @@ source 'https://rubygems.org' do
   gem 'omniauth-google-oauth2'
   gem 'doorkeeper'
   gem 'puma'
-  gem 'rails', '5.0.0'
+  gem 'rails', '5.0.0.1'
   gem 'rinku', require: 'rails_rinku'
   gem 'rmail'
   gem 'sass-rails'
@@ -36,23 +36,18 @@ source 'https://rubygems.org' do
     gem 'binding_of_caller'
     gem 'annotate'
     gem 'better_errors'
-    gem 'bullet', group: :test
-    gem 'byebug', platform: :mri, group: :test
     gem 'listen'
-    gem 'pry-byebug', group: :test
-    gem 'pry-rails', group: :test
     gem 'rubocop', require: false
     gem 'spring'
     gem 'spring-watcher-listen'
     gem 'web-console'
+    gem 'yard', require: false
   end
 
   group :test do
     gem 'capybara'
     gem 'capybara-screenshot'
     gem 'database_rewinder'
-    gem 'factory_girl_rails', group: :development
-    gem 'ffaker',             group: :development
     gem 'json_expressions'
     gem 'launchy'
     gem 'poltergeist'
@@ -66,7 +61,12 @@ source 'https://rubygems.org' do
     gem 'webmock'
   end
 
-  group :doc do
-    gem 'yard'
+  group :development, :test do
+    gem 'bullet'
+    gem 'byebug', platform: :mri
+    gem 'factory_girl_rails'
+    gem 'ffaker'
+    gem 'pry-byebug'
+    gem 'pry-rails'
   end
 end
