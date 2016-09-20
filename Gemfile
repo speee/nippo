@@ -11,6 +11,7 @@ source 'https://rubygems.org' do
   gem 'google-api-client'
   gem 'jbuilder'
   gem 'jquery-rails'
+  gem 'komachi_heartbeat'
   gem 'mysql2'
   gem 'omniauth'
   gem 'omniauth-google-oauth2'
