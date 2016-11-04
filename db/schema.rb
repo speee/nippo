@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617063534) do
+ActiveRecord::Schema.define(version: 20161022025309) do
 
   create_table "nippos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "user_id",                                null: false
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 20160617063534) do
     t.index ["sent_at"], name: "index_nippos_on_sent_at", using: :btree
     t.index ["user_id", "reported_for"], name: "index_nippos_on_user_id_and_reported_for", unique: true, using: :btree
     t.index ["user_id"], name: "index_nippos_on_user_id", using: :btree
+  end
+
+  create_table "notification_from_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "notification_id",               null: false
+    t.string   "title",           limit: 64,    null: false
+    t.text     "body",            limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["notification_id"], name: "index_notification_from_admins_on_notification_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "type",       limit: 1, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -73,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160617063534) do
   end
 
   add_foreign_key "nippos", "users"
+  add_foreign_key "notification_from_admins", "notifications"
   add_foreign_key "reactions", "nippos"
   add_foreign_key "reactions", "users"
   add_foreign_key "templates", "users"
