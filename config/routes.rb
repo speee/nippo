@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     constraints: SubmitNameConstraint.new(:draft)
 
   resources :nippos, only: %i(new create show update)
+  resources :notifications, only: %i(show)
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

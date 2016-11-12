@@ -13,6 +13,8 @@ class Notification < ApplicationRecord
   # STI使わないので `type` カラムを退避
   self.inheritance_column = :sti_type
 
+  has_one :from_admin, class_name: 'Notification::FromAdmin'
+
   enum type: {
     from_admin: 1,
   }
