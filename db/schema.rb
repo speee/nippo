@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161022025309) do
     t.integer  "notification_id",               null: false
     t.string   "title",           limit: 64,    null: false
     t.text     "body",            limit: 65535
+    t.date     "display_limit",                 null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["notification_id"], name: "index_notification_from_admins_on_notification_id", using: :btree

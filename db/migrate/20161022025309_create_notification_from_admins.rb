@@ -5,6 +5,7 @@ class CreateNotificationFromAdmins < ActiveRecord::Migration[5.0]
 
       t.string 'title', limit: 64, null: false
       t.text   'body'
+      t.date   'display_limit', null: false
 
       t.timestamps
     end

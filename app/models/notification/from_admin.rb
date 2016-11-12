@@ -7,6 +7,7 @@
 #  notification_id :integer          not null
 #  title           :string(64)       not null
 #  body            :text(65535)
+#  display_limit   :date             not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -23,4 +24,6 @@ class Notification::FromAdmin < ApplicationRecord
   include NotificationDetail[:from_admin]
 
   validates :title, :body, presence: true
+
+  scope :for_display, -> { where(display_limit: Time.zone.today..Float::INFINITY) }
 end
