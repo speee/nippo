@@ -4,12 +4,15 @@ RSpec.describe Notification::FromAdmin do
 
   it { is_expected.to be_valid }
 
-  context 'when after create' do
-    before { subject.save }
+  describe '.create_with_parent' do
+    it 'creates self instance with parent notification' do
+      result = Notification::FromAdmin.create_with_parent(
+        title: 'title',
+        **FG.attributes_for(:notification_from_admin),
+      )
 
-    it 'creates notification automatically' do
-      expect(subject.notification).to be_present
-      expect(subject.notification.type).to eq 'from_admin'
+      expect(result.notification).not_to be_nil
+      expect(result.notification.title).to eq 'title'
     end
   end
 

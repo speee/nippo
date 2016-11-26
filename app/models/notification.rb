@@ -5,6 +5,7 @@
 #
 #  id         :integer          not null, primary key
 #  type       :integer          not null
+#  title      :string(64)       not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -19,5 +20,5 @@ class Notification < ApplicationRecord
     from_admin: 1,
   }
 
-  validates :type, presence: true
+  validates :type, :title, presence: true
 end

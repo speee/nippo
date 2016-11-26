@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20161022025309) do
 
   create_table "notification_from_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "notification_id",               null: false
-    t.string   "title",           limit: 64,    null: false
     t.text     "body",            limit: 65535
     t.date     "display_limit",                 null: false
     t.datetime "created_at",                    null: false
@@ -37,9 +36,10 @@ ActiveRecord::Schema.define(version: 20161022025309) do
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer  "type",       limit: 1, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "type",       limit: 1,  null: false
+    t.string   "title",      limit: 64, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
