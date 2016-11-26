@@ -17,8 +17,8 @@ RSpec.describe Notification::FromAdmin do
   end
 
   describe 'scope :for_display' do
-    let!(:past_notification)    { FG.create(:notification_from_admin, display_limit: Time.zone.today - 1) }
-    let!(:current_notification) { FG.create(:notification_from_admin, display_limit: Time.zone.today) }
+    let!(:past_notification)    { FG.create(:notification_from_admin, expiration_date: Time.zone.today - 1) }
+    let!(:current_notification) { FG.create(:notification_from_admin, expiration_date: Time.zone.today) }
 
     subject { Notification::FromAdmin.for_display }
 

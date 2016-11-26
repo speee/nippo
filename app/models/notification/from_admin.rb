@@ -6,7 +6,7 @@
 #  id              :integer          not null, primary key
 #  notification_id :integer          not null
 #  body            :text(65535)
-#  display_limit   :date             not null
+#  expiration_date :date             not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -24,5 +24,5 @@ class Notification::FromAdmin < ApplicationRecord
 
   validates :body, presence: true
 
-  scope :for_display, -> { where(display_limit: Time.zone.today..Float::INFINITY) }
+  scope :for_display, -> { where(expiration_date: Time.zone.today..Float::INFINITY) }
 end

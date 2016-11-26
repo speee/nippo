@@ -4,7 +4,7 @@ class CreateNotificationFromAdmins < ActiveRecord::Migration[5.0]
       t.belongs_to :notification, foreign_key: true, null: false
 
       t.text   'body'
-      t.date   'display_limit', null: false
+      t.date   'expiration_date', null: false
 
       t.timestamps
     end
