@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # rubocop:disable Metrics/BlockLength
-ruby '2.3.1'
+ruby '2.3.3'
 
 source 'https://rubygems.org' do
   gem 'active_decorator'
