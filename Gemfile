@@ -33,9 +33,9 @@ source 'https://rubygems.org' do
   end
 
   group :development do
-    gem 'binding_of_caller'
     gem 'annotate'
     gem 'better_errors'
+    gem 'binding_of_caller'
     gem 'listen'
     gem 'rubocop', require: false
     gem 'spring'
