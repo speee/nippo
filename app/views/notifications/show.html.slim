@@ -1,0 +1,3 @@
+- case @notification.type
+- when 'from_admin'
+  = render partial: 'notifications/from_admin', locals: { from_admin: @notification.from_admin }

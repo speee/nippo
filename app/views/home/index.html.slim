@@ -1,5 +1,14 @@
 = render 'shared/nippos/notice_draft'
 
+- if @notification_from_admins.present?
+  .alert.alert-info.alert-dismissible role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="Close"
+      span aria-hidden="true"
+        | &times;
+    ul
+      - @notification_from_admins.each do |from_admin|
+        li = link_to from_admin.title, from_admin.notification
+
 .btn-group-vertical.col-md-12
   - @recent_nippos.each do |nippo|
     = link_to nippo.dated_subject, nippo, class: 'btn btn-raised', style: 'text-align:left !important'
