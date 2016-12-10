@@ -47,6 +47,9 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
 Style/NumericLiterals:
   MinDigits: 10
 
